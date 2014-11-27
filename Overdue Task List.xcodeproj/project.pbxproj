@@ -14,6 +14,9 @@
 		99B3A55B1A16FED300DDD104 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99B3A55A1A16FED300DDD104 /* Images.xcassets */; };
 		99B3A55E1A16FED300DDD104 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99B3A55C1A16FED300DDD104 /* LaunchScreen.xib */; };
 		99B3A56A1A16FED300DDD104 /* Overdue_Task_ListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3A5691A16FED300DDD104 /* Overdue_Task_ListTests.m */; };
+		99B3A5751A16FF8D00DDD104 /* AddTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3A5741A16FF8D00DDD104 /* AddTaskViewController.m */; };
+		99B3A5781A16FFB500DDD104 /* DetailTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3A5771A16FFB500DDD104 /* DetailTaskViewController.m */; };
+		99B3A57B1A16FFF500DDD104 /* EditTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99B3A57A1A16FFF500DDD104 /* EditTaskViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +43,12 @@
 		99B3A5631A16FED300DDD104 /* Overdue Task ListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Overdue Task ListTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		99B3A5681A16FED300DDD104 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		99B3A5691A16FED300DDD104 /* Overdue_Task_ListTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Overdue_Task_ListTests.m; sourceTree = "<group>"; };
+		99B3A5731A16FF8D00DDD104 /* AddTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTaskViewController.h; sourceTree = "<group>"; };
+		99B3A5741A16FF8D00DDD104 /* AddTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTaskViewController.m; sourceTree = "<group>"; };
+		99B3A5761A16FFB500DDD104 /* DetailTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTaskViewController.h; sourceTree = "<group>"; };
+		99B3A5771A16FFB500DDD104 /* DetailTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTaskViewController.m; sourceTree = "<group>"; };
+		99B3A5791A16FFF500DDD104 /* EditTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTaskViewController.h; sourceTree = "<group>"; };
+		99B3A57A1A16FFF500DDD104 /* EditTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTaskViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +98,12 @@
 				99B3A55A1A16FED300DDD104 /* Images.xcassets */,
 				99B3A55C1A16FED300DDD104 /* LaunchScreen.xib */,
 				99B3A54D1A16FED300DDD104 /* Supporting Files */,
+				99B3A5731A16FF8D00DDD104 /* AddTaskViewController.h */,
+				99B3A5741A16FF8D00DDD104 /* AddTaskViewController.m */,
+				99B3A5761A16FFB500DDD104 /* DetailTaskViewController.h */,
+				99B3A5771A16FFB500DDD104 /* DetailTaskViewController.m */,
+				99B3A5791A16FFF500DDD104 /* EditTaskViewController.h */,
+				99B3A57A1A16FFF500DDD104 /* EditTaskViewController.m */,
 			);
 			path = "Overdue Task List";
 			sourceTree = "<group>";
@@ -220,8 +235,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				99B3A5561A16FED300DDD104 /* ViewController.m in Sources */,
+				99B3A5751A16FF8D00DDD104 /* AddTaskViewController.m in Sources */,
 				99B3A5531A16FED300DDD104 /* AppDelegate.m in Sources */,
+				99B3A57B1A16FFF500DDD104 /* EditTaskViewController.m in Sources */,
 				99B3A5501A16FED300DDD104 /* main.m in Sources */,
+				99B3A5781A16FFB500DDD104 /* DetailTaskViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
