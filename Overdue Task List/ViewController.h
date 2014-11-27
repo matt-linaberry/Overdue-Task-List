@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UITableView *taskTableView;
+- (IBAction)reorderButtonClick:(UIBarButtonItem *)sender;
+- (IBAction)addTaskButtonClick:(UIBarButtonItem *)sender;
 
 
 @end

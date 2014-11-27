@@ -34,4 +34,9 @@
 }
 */
 
+- (IBAction)addTaskClick:(UIButton *)sender {
+}
+
+- (IBAction)cancelButtonClick:(UIButton *)sender {
+}
 @end
