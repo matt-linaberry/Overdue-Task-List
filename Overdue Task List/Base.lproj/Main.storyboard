@@ -39,17 +39,13 @@
                                 <action selector="reorderButtonClick:" destination="vXZ-lx-hvc" id="E6Z-tX-LCJ"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Add Task" id="lY7-24-mJe">
-                            <connections>
-                                <action selector="addTaskButtonClick:" destination="vXZ-lx-hvc" id="cWe-Gw-QZs"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Add Task" id="lY7-24-mJe"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="taskTableView" destination="Qbd-ZN-JfC" id="KM2-Ce-sSt"/>
-                        <segue destination="CMF-8N-rLl" kind="modal" identifier="toAddTaskViewSegue" id="yaB-cM-lv6"/>
                         <segue destination="jSl-sH-gwl" kind="push" identifier="toDetailTaskViewSegue" id="Tea-8j-fij"/>
+                        <segue destination="CMF-8N-rLl" kind="modal" identifier="toAddTaskViewControllerSegue" id="uRa-Aj-21P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

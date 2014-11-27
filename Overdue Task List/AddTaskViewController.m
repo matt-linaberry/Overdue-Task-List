@@ -24,6 +24,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(Task *) getTask
+{
+    Task *aTask = [[Task alloc] init];
+    aTask.title = self.taskNameTextField.text;
+    aTask.taskDetail = self.taskDetailTextView.text;
+    aTask.date = self.dueDatePicker.date;
+    aTask.isComplete = NO;
+    return aTask;
+}
+
 /*
 #pragma mark - Navigation
 
