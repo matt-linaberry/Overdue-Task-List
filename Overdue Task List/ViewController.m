@@ -17,6 +17,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    NSArray *theTasks = [[NSUserDefaults standardUserDefaults] arrayForKey:TASK_LIST];
+    
+    for (NSDictionary *dictionary in theTasks)
+    {
+        Task *taskObject = [self taskObjectForDictionary:dictionary];
+        [self.taskObjects addObject:taskObject];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,6 +38,7 @@
 }
 
 - (IBAction)addTaskButtonClick:(UIBarButtonItem *)sender {
+    [self performSegueWithIdentifier:@"toAddTaskViewControllerSegue" sender:nil];
 }
 
 -(NSMutableArray *) taskObjects
@@ -67,6 +76,12 @@
 {
     NSDictionary *taskDictionary = @{TASK_TITLE:taskObject.title, TASK_DESC:taskObject.taskDetail, TASK_DUE_DATE:taskObject.date, TASK_COMPLETION:@(taskObject.isComplete)};
     return taskDictionary;
+}
+
+-(Task *) taskObjectForDictionary:(NSDictionary *) dictionary
+{
+    Task *taskObject = [[Task alloc] initWithData:dictionary];
+    return taskObject;
 }
 
 # pragma mark - Navigation stuffs

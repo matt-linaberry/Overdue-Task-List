@@ -39,7 +39,11 @@
                                 <action selector="reorderButtonClick:" destination="vXZ-lx-hvc" id="E6Z-tX-LCJ"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Add Task" id="lY7-24-mJe"/>
+                        <barButtonItem key="rightBarButtonItem" title="Add Task" id="lY7-24-mJe">
+                            <connections>
+                                <action selector="addTaskButtonClick:" destination="vXZ-lx-hvc" id="ifH-PL-oys"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>

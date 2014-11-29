@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AddTaskViewController.h"
+#import "Task.h"
 
 @interface ViewController : UIViewController <AddTaskViewControllerDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *taskTableView;
