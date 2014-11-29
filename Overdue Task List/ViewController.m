@@ -25,6 +25,8 @@
         Task *taskObject = [self taskObjectForDictionary:dictionary];
         [self.taskObjects addObject:taskObject];
     }
+    self.taskTableView.dataSource = self;
+    self.taskTableView.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,6 +71,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:taskObjectsAsList forKey:TASK_LIST];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self.taskTableView reloadData];
     
 }
 
@@ -82,6 +85,30 @@
 {
     Task *taskObject = [[Task alloc] initWithData:dictionary];
     return taskObject;
+}
+
+#pragma mark - UITableView data source stuff.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.taskObjects count];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // this method should display the task information
+    static NSString *cellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    Task *taskObject = [self.taskObjects objectAtIndex:indexPath.row];
+    cell.textLabel.text =taskObject.title;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    cell.detailTextLabel.text = [formatter stringFromDate:taskObject.date];
+    return cell;
 }
 
 # pragma mark - Navigation stuffs

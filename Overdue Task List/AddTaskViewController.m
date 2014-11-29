@@ -45,8 +45,10 @@
 */
 
 - (IBAction)addTaskClick:(UIButton *)sender {
+    [self.delegate didAddTask:[self getTask]];
 }
 
 - (IBAction)cancelButtonClick:(UIButton *)sender {
+    [self.delegate didCancel];
 }
 @end
