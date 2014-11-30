@@ -160,6 +160,31 @@
     [self.taskTableView reloadData];
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        // delete the row from the data source
+        [self.taskObjects removeObjectAtIndex:indexPath.row];
+        
+        // delete the row from the NSUserDefaults array
+        NSMutableArray *updatedTaskList = [[NSMutableArray alloc] init];
+        for (Task *taskObject in self.taskObjects)
+        {
+            [updatedTaskList addObject:[self taskObjectAsAPropertyList:taskObject]];
+        }
+        [[NSUserDefaults standardUserDefaults] setObject:updatedTaskList forKey:TASK_LIST];
+        // finally, sync the updated NSUserDefaults array
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
 # pragma mark - Navigation stuffs
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
