@@ -87,6 +87,18 @@
     return taskObject;
 }
 
+- (BOOL) isGreaterThanDate:(NSDate *)date and:(NSDate *)toDate
+{
+    int dateAsInt = [date timeIntervalSince1970];
+    int toDateAsInt = [toDate timeIntervalSince1970];
+    
+    if (dateAsInt < toDateAsInt)
+        return YES;
+    else
+        return NO;
+    
+}
+
 #pragma mark - UITableView data source stuff.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -107,8 +119,45 @@
     cell.textLabel.text =taskObject.title;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
+
+    if (taskObject.isComplete)
+    {
+        cell.backgroundColor = [UIColor greenColor];
+    }
+    else
+    {
+        cell.backgroundColor = [UIColor yellowColor];
+    }
+    
+    if (([self isGreaterThanDate:taskObject.date and:[NSDate date]]) && !(taskObject.isComplete)){
+        cell.backgroundColor = [UIColor redColor];
+    }
     cell.detailTextLabel.text = [formatter stringFromDate:taskObject.date];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // call the helper method.
+    
+    Task *taskObject = [self.taskObjects objectAtIndex:indexPath.row];
+    [self updateCompletionOfTask:taskObject forIndexPath:indexPath];
+
+}
+
+- (void) updateCompletionOfTask:(Task *)task forIndexPath:(NSIndexPath *)indexPath
+{
+    task.isComplete = !(task.isComplete); // flip the flag
+    
+    // get the array of tasks from the NSUserDefaults object
+    NSMutableArray *taskObjectsAsPropertyLists = [[[NSUserDefaults standardUserDefaults] arrayForKey:TASK_LIST] mutableCopy];
+    // remove the task from the array
+    [taskObjectsAsPropertyLists removeObjectAtIndex:indexPath.row];
+    // re-add the new task object to the NSUserDefaults array
+    [taskObjectsAsPropertyLists addObject:[self taskObjectAsAPropertyList:task]];
+    // presist the array to the NSUserDefaults
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self.taskTableView reloadData];
 }
 
 # pragma mark - Navigation stuffs
