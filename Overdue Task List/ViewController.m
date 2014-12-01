@@ -36,7 +36,17 @@
 
 
 
-- (IBAction)reorderButtonClick:(UIBarButtonItem *)sender {
+- (IBAction)reorderButtonClick:(UIBarButtonItem *)sender
+{
+    // go into editing mode
+    if (self.taskTableView.editing == YES)
+    {
+        [self.taskTableView setEditing:NO animated:YES];
+    }
+    else
+    {
+        [self.taskTableView setEditing:YES animated:YES];
+    }
 }
 
 - (IBAction)addTaskButtonClick:(UIBarButtonItem *)sender {
@@ -100,6 +110,22 @@
 }
 
 #pragma mark - UITableView data source stuff.
+
+-(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+-(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    //which task object
+    Task *taskObject = [self.taskObjects objectAtIndex:sourceIndexPath.row];
+    // remove from the old spot.
+    [self.taskObjects removeObjectAtIndex:sourceIndexPath.row];
+    // now put it in the new spot.
+    [self.taskObjects insertObject:taskObject atIndex:destinationIndexPath.row];
+    [self saveTasks];
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [self.taskObjects count];
@@ -145,6 +171,19 @@
 
 }
 
+- (void) saveTasks
+{
+    NSMutableArray *taskObjectsAsPropertyLists = [[NSMutableArray alloc] init];
+    for (int x = 0; x < [self.taskObjects count]; x++)
+    {
+        [taskObjectsAsPropertyLists addObject:[self taskObjectAsAPropertyList:self.taskObjects[x]]];
+    }
+    
+    // now presist it
+    [[NSUserDefaults standardUserDefaults] setObject:taskObjectsAsPropertyLists forKey:TASK_LIST];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (void) updateCompletionOfTask:(Task *)task forIndexPath:(NSIndexPath *)indexPath
 {
     task.isComplete = !(task.isComplete); // flip the flag
@@ -154,7 +193,8 @@
     // remove the task from the array
     [taskObjectsAsPropertyLists removeObjectAtIndex:indexPath.row];
     // re-add the new task object to the NSUserDefaults array
-    [taskObjectsAsPropertyLists addObject:[self taskObjectAsAPropertyList:task]];
+    [taskObjectsAsPropertyLists insertObject:[self taskObjectAsAPropertyList:task] atIndex:indexPath.row];\
+    [[NSUserDefaults standardUserDefaults] setObject:taskObjectsAsPropertyLists forKey:TASK_LIST];
     // presist the array to the NSUserDefaults
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self.taskTableView reloadData];
@@ -190,6 +230,8 @@
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
+
+
 # pragma mark - Navigation stuffs
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
