@@ -165,6 +165,11 @@
     return YES;
 }
 
+-(void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"toDetailTaskViewSegue" sender:indexPath];
+}
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
@@ -193,6 +198,15 @@
     {
         AddTaskViewController *vc = segue.destinationViewController;
         vc.delegate = self;
+    }
+    else if ([segue.destinationViewController isKindOfClass:[DetailTaskViewController class]])
+    {
+        NSLog(@"Hey look!");
+        DetailTaskViewController *dtc = segue.destinationViewController;
+        NSIndexPath *path = sender;
+        Task *taskObject = [self.taskObjects objectAtIndex:path.row];
+        dtc.taskObject = taskObject;
+
     }
 }
 @end
