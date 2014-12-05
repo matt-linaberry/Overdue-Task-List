@@ -231,6 +231,12 @@
     }
 }
 
+-(void)updateTask
+{
+    [self saveTasks];
+    [self.taskTableView reloadData];
+}
+
 
 # pragma mark - Navigation stuffs
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -243,11 +249,11 @@
     }
     else if ([segue.destinationViewController isKindOfClass:[DetailTaskViewController class]])
     {
-        NSLog(@"Hey look!");
         DetailTaskViewController *dtc = segue.destinationViewController;
         NSIndexPath *path = sender;
         Task *taskObject = [self.taskObjects objectAtIndex:path.row];
         dtc.taskObject = taskObject;
+        dtc.delegate = self;
 
     }
 }

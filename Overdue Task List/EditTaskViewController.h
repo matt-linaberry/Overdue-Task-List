@@ -7,8 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Task.h"
 
-@interface EditTaskViewController : UIViewController
+@protocol EditTaskViewControllerDelegate <NSObject>
+-(void)didUpdateTask;
+@end
+
+@interface EditTaskViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate>
+
+@property (strong, nonatomic) Task *task;
+@property (weak, nonatomic) id <EditTaskViewControllerDelegate> delegate;
 @property (strong, nonatomic) IBOutlet UITextField *taskNameTextField;
 @property (strong, nonatomic) IBOutlet UITextView *taskDetailTextView;
 @property (strong, nonatomic) IBOutlet UIDatePicker *dueDatePicker;

@@ -15,7 +15,7 @@
 
 @end
 
-@interface AddTaskViewController : UIViewController
+@interface AddTaskViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) id <AddTaskViewControllerDelegate> delegate;
 @property (strong, nonatomic) IBOutlet UITextField *taskNameTextField;
 @property (strong, nonatomic) IBOutlet UITextView *taskDetailTextView;

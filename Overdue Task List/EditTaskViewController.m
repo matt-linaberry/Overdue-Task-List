@@ -17,6 +17,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.taskNameTextField.text = self.task.title;
+    self.taskDetailTextView.text=  self.task.description;
+    self.dueDatePicker.date = self.task.date;
+    self.taskNameTextField.delegate = self;
+    self.taskDetailTextView.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,6 +39,32 @@
 }
 */
 
+- (void) updateTask
+{
+    self.task.title = self.taskNameTextField.text;
+    self.task.taskDetail = self.taskDetailTextView.text;
+    self.task.date = self.dueDatePicker.date;
+}
+
 - (IBAction)saveButtonClick:(UIBarButtonItem *)sender {
+    [self updateTask];
+    [self.delegate didUpdateTask];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.taskNameTextField resignFirstResponder];
+    return YES;
+}
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"])
+    {
+        // this works when you put a carriage return in the string.
+        [self.taskDetailTextView resignFirstResponder];
+        return NO;
+    }
+    return YES;
 }
 @end

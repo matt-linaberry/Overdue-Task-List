@@ -40,5 +40,28 @@
 */
 
 - (IBAction)editButtonClick:(UIBarButtonItem *)sender {
+    [self performSegueWithIdentifier:@"toEditTaskViewSegue" sender:nil];
+    
+}
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController isKindOfClass:[EditTaskViewController class]])
+    {
+        EditTaskViewController *editTaskViewController = segue.destinationViewController;
+        editTaskViewController.task = self.taskObject;
+        editTaskViewController.delegate = self;
+    }
+}
+
+-(void) didUpdateTask
+{
+    self.taskNameLabel.text = self.taskObject.title;
+    self.taskDetailLabel.text = self.taskObject.taskDetail;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *stringFromDate = [formatter stringFromDate:self.taskObject.date];
+    self.dueDateLabel.text = stringFromDate;
+    [self.navigationController popViewControllerAnimated:YES];
+    [self.delegate updateTask];
 }
 @end

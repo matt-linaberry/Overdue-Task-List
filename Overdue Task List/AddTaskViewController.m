@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.taskNameTextField.delegate = self;
+    self.taskDetailTextView.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,6 +45,23 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.taskNameTextField resignFirstResponder];
+    return YES;
+}
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"])
+    {
+        // this works when you put a carriage return in the string.
+        [self.taskDetailTextView resignFirstResponder];
+        return NO;
+    }
+    return YES;
+}
 
 - (IBAction)addTaskClick:(UIButton *)sender {
     [self.delegate didAddTask:[self getTask]];
